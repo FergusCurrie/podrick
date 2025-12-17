@@ -1,0 +1,15 @@
+include:
+  - compose/frontdoor.yaml
+  - compose/postgres.yaml
+  - compose/minio.yaml
+  - compose/mlflow.yaml
+
+volumes:
+  mlflow_postgres_volume:
+    driver: local
+  minio_data:
+    driver: local
+
+networks:
+  podrick:
+    driver: bridge

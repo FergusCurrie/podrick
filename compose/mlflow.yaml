@@ -1,0 +1,25 @@
+services:
+  mlflow:
+    restart: always
+    build: ./mlflow
+    container_name: mlflow_server
+    ports:
+      - "${MLFLOW_PORT}:5000"
+    environment:
+      - AWS_ACCESS_KEY_ID=${MINIO_ROOT_USER}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_ROOT_PASSWORD}
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:${MINIO_PORT}
+      - MLFLOW_S3_IGNORE_TLS=true
+    command: >
+      mlflow server
+      --backend-store-uri postgresql://${MLFLOW_POSTGRES_USER}:${MLFLOW_POSTGRES_PASSWORD}@mlflow_backend_postgres:5432/${MLFLOW_POSTGRES_DB}
+      --host 0.0.0.0
+      --port 5000
+      --serve-artifacts
+      --artifacts-destination s3://bucket
+    depends_on:
+      - mlflow_backend_postgres
+      - minio-create-bucket
+    networks:
+      - podrick
+

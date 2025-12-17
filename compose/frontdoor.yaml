@@ -1,0 +1,10 @@
+services:
+  frontdoor:
+    build: ./frontdoor
+    container_name: frontdoor
+    restart: always
+    ports:
+      - "${FRONTDOOR_PORT}:8000"
+    networks:
+      - podrick
+

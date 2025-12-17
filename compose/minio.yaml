@@ -1,0 +1,42 @@
+services:
+  minio:
+    image: minio/minio
+    container_name: minio_server
+    restart: always
+    expose:
+      - "${MINIO_PORT}"
+      - "${MINIO_CONSOLE_PORT}"
+    ports:
+      - "${MINIO_PORT}:9000"
+      - "${MINIO_CONSOLE_PORT}:9001"
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    healthcheck:
+      test: timeout 5s bash -c ':> /dev/tcp/127.0.0.1/9000' || exit 1
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    command: server /data --console-address ":9001"
+    networks:
+      - podrick
+
+  minio-create-bucket:
+    image: minio/mc
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      bash -c "
+      mc alias set minio http://minio:${MINIO_PORT} ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} &&
+      if ! mc ls minio | grep --quiet bucket; then
+        mc mb minio/bucket
+      else
+        echo 'bucket already exists'
+      fi
+      "
+    networks:
+      - podrick
+
