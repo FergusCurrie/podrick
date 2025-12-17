@@ -1,12 +1,12 @@
 // Alloy configuration for Docker log collection
 
-// Discover Docker containers
+// Discover Docker containers - see which containers are running 
 discovery.docker "containers" {
   host = "unix:///var/run/docker.sock"
   refresh_interval = "5s"
 }
 
-// Relabel discovered targets
+// Relabel discovered targets - takes container metadata and maps to loki labels 
 discovery.relabel "docker" {
   targets = discovery.docker.containers.targets
 

@@ -8,16 +8,16 @@ common:
   instance_addr: 127.0.0.1
   path_prefix: /loki
   storage:
-    filesystem:
+    filesystem: # store directly on fs 
       chunks_directory: /loki/chunks
       rules_directory: /loki/rules
-  replication_factor: 1
+  replication_factor: 1 # store 1 copy 
   ring:
     kvstore:
       store: inmemory
 
 query_range:
-  results_cache:
+  results_cache: # caches queries up to 100mb 
     cache:
       embedded_cache:
         enabled: true
@@ -33,9 +33,9 @@ schema_config:
         prefix: index_
         period: 24h
 
-ruler:
+ruler: # ruler managers alerting
   alertmanager_url: http://localhost:9093
 
-limits_config:
+limits_config: # logs older than 7 days deleted 
   retention_period: 168h
 
