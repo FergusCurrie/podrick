@@ -5,6 +5,7 @@ include:
   - compose/mlflow.yaml
   - compose/loki.yaml
   - compose/grafana.yaml
+  - compose/dep_study.yaml
 
 volumes:
   mlflow_postgres_volume:
