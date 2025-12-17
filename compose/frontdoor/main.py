@@ -171,13 +171,11 @@ async def root():
                 <div class="card-title">Minio</div>
                 <div class="card-port">:9001</div>
             </a>
-            <a href="http://localhost:3000" target="_blank" class="card minio">
+            <a href="http://localhost:6338" target="_blank" class="card minio">
                 <div class="card-title">Grafana</div>
-                <div class="card-port">:9001</div>
             </a>
-            <a href="http://localhost:12345" target="_blank" class="card minio">
+            <a href="http://localhost:6337" target="_blank" class="card minio">
                 <div class="card-title">ALloy</div>
-                <div class="card-port">:9001</div>
             </a>
         </div>
         
