@@ -1,4 +1,6 @@
+# Podrick
 
+Compose for app stack. 
 
 
 docker compose up -d 

@@ -171,6 +171,14 @@ async def root():
                 <div class="card-title">Minio</div>
                 <div class="card-port">:9001</div>
             </a>
+            <a href="http://localhost:3000" target="_blank" class="card minio">
+                <div class="card-title">Grafana</div>
+                <div class="card-port">:9001</div>
+            </a>
+            <a href="http://localhost:12345" target="_blank" class="card minio">
+                <div class="card-title">ALloy</div>
+                <div class="card-port">:9001</div>
+            </a>
         </div>
         
         <p class="footer">Running on port 8000</p>

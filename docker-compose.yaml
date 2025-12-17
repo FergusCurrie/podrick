@@ -3,11 +3,19 @@ include:
   - compose/postgres.yaml
   - compose/minio.yaml
   - compose/mlflow.yaml
+  - compose/loki.yaml
+  - compose/grafana.yaml
 
 volumes:
   mlflow_postgres_volume:
     driver: local
   minio_data:
+    driver: local
+  loki_data:
+    driver: local
+  grafana_data:
+    driver: local
+  alloy_data:
     driver: local
 
 networks:
