@@ -1,13 +1,21 @@
 # Podrick
 
-Compose for app stack. 
+Local devops setup. 
+
+Overview:
+![arch](docs/podrick.png)
+
+# Services 
+
+## Mlflow 
+
+Mlflow instance, using minio and postgres as dbs. 
 
 
-docker compose up -d 
-docker compose up -d --build frontdoor
 
-## Services 
+## Observability 
 
+Naive setup of Loki, Alloy, Grafana which tracks docker logs. 
 
 ### Loki 
 
@@ -28,4 +36,5 @@ docker compose up -d --build frontdoor
 - 2 volumes 
     - settings
     - graphana volume
+
 
