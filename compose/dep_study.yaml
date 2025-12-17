@@ -1,0 +1,11 @@
+services:
+  dep-study:
+    image: dep-study-app:latest
+    ports:
+      - "${DEP_STUDY_PORT}:9897"
+    environment:
+      - ENV=production
+      - BACKEND_ENV=prd
+    restart: unless-stopped
+    volumes:
+      - /home/fergus/dbs/dep_study_db:/app/db_data
